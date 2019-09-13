@@ -28,7 +28,7 @@ public class searchCharacterCount {
 		System.out.println("Character counts below");
 		
 		for(i='A';i<='Z';i++) {
-			System.out.println("Character " + (char) i + " repeats " + charCount[i-65] + " times");
+			System.out.println("Character " + (char) i + " repeats " + charCount[i-'A'] + " times");
 		}
 		
 
