@@ -2,76 +2,23 @@ package com.football.directory;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class eplClub extends footballClub {
 	static int numberOfClubs;
-	private String player;
-	private String position;
-	private int squadNumber;
-	private String nationality;
-	private Date DoB;
+	private List<footballPlayer> playerDetails;
 	
+	public List<footballPlayer> getPlayerDetails() {
+		return playerDetails;
+	}
+
+	public void setPlayerDetails(List<footballPlayer> playerDetails) {
+		this.playerDetails = playerDetails;
+	}
 	
-
-	public String getPlayer() {
-		return player;
+	public void setPlayerDetails(footballPlayer playerDetails) {
+		this.playerDetails.add(playerDetails);
 	}
-
-
-
-	public void setPlayer(String player) {
-		this.player = player;
-	}
-
-
-
-	public String getPosition() {
-		return position;
-	}
-
-
-
-	public void setPosition(String position) {
-		this.position = position;
-	}
-
-
-
-	public int getSquadNumber() {
-		return squadNumber;
-	}
-
-
-
-	public void setSquadNumber(int i) {
-		this.squadNumber = i;
-	}
-
-
-
-	public String getNationality() {
-		return nationality;
-	}
-
-
-
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
-	}
-
-
-
-	public Date getDoB() {
-		return DoB;
-	}
-
-
-
-	public void setDoB(Date doB) {
-		DoB = doB;
-	}
-
-
 
 	public eplClub() {
 		// TODO Auto-generated constructor stub
@@ -80,16 +27,19 @@ public class eplClub extends footballClub {
 		this.setRegion("Europe");
 		this.setLeagueName("Barclay's Premier League");
 		this.setLeagueDivision("I");
-		
+		playerDetails = new ArrayList<footballPlayer> ();
 	}
 	
 	public static void main(String[] args) {
 		
 		String[] eplClubs = {"Arsenal", "Chelsea", "Manchester United", "Liverpool", "Manchester City", "Totenham Hotspurs"};
-		String[] arsenalPlayers = {"Aubameyang", "Lacazette", "Granit Xhaka"};
-		String[] chelseaPlayers = {"Tobby Abraham", "Willian", "Marcus Alonso"};
-		ArrayList<eplClub> eplClubDetails = new ArrayList<eplClub>();
-		int iterateList=0;
+		String[] arsenalPlayersNames = {"Aubameyang", "Lacazette", "Granit Xhaka"};
+		String[] arsenalPlayersPosition = {"Striker", "Striker", "Mid Fielder"};
+		String[] chelseaPlayerNames = {"Tobby Abraham", "Willian", "Marcus Alonso"};
+		String[] chelseaPlayersPosition = {"Striker", "Winger", "Defender"};
+		
+		List<eplClub> eplClubDetails = new ArrayList<eplClub>();
+		//int iterateList=0;
 		
 		for (int i=0; i<eplClubs.length; i++) {
 			eplClub clubDetails = new eplClub();
@@ -99,16 +49,26 @@ public class eplClub extends footballClub {
 			switch (eplClubs[i]) {
 			
 			case "Arsenal":
-				// set Striker for Arsenal
-				clubDetails.setPlayer(arsenalPlayers[0]);
-				clubDetails.setSquadNumber(14);
-				clubDetails.setPosition("Striker");
+				// set Players for Arsenal
+				for (int j=0;j<arsenalPlayersNames.length;j++) {
+					
+					footballPlayer player = new footballPlayer();
+					player.setPlayerName(arsenalPlayersNames[j]);
+					player.setPosition(arsenalPlayersPosition[j]);
+					clubDetails.setPlayerDetails(player);
+				}
 				break;
 				
 			case "Chelsea":
-				clubDetails.setPlayer(chelseaPlayers[0]);
-				//clubDetails.setSquadNumber(14);
-				clubDetails.setPosition("Striker");
+				// set Players for Chelsea
+				for (int j=0;j<chelseaPlayerNames.length;j++) {
+					
+					footballPlayer player = new footballPlayer();
+					player.setPlayerName(chelseaPlayerNames[j]);
+					player.setPosition(chelseaPlayersPosition[j]);
+					clubDetails.setPlayerDetails(player);
+				}
+				
 				break;
 				
 			 default:
@@ -127,8 +87,13 @@ public class eplClub extends footballClub {
 			System.out.println("Country is: " + clubDetailsInfo.getCountry());
 			System.out.println("Region is: " + clubDetailsInfo.getRegion());
 			System.out.println("Name of the club is: " + clubDetailsInfo.getClubName());
-			System.out.println("Name of player is: " + clubDetailsInfo.getPlayer());
-			//iterateList++;
+			
+			// Iterate through the Player Details List
+			for(footballPlayer player: clubDetailsInfo.getPlayerDetails()) {
+			System.out.println("Name of the player is: " + player.getPlayerName());
+			System.out.println("Position of the player is: " + player.getPosition());
+			}
+			
 		}
 	}
 
